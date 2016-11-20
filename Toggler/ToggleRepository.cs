@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Toggler
 {
-    public class ToggleRepository : IToggleRepository
+    public class ToggleRepository
     {
         private readonly IToggleData ToggleData;
         private IEnumerable<Toggle> data;

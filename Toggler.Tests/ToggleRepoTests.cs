@@ -13,17 +13,15 @@ namespace Toggler.Tests
     {
         private IToggleData iData;
         private List<Toggle> togglelist;
-        private IToggleRepository iRepo; 
+
         private ToggleRepository repo;
 
 
         [OneTimeSetUp]
         public void Setup()
         {
-
             togglelist = new ToggleTestData().TestData();
             iData = Substitute.For<IToggleData>();
-            iRepo = Substitute.For<IToggleRepository>();
             iData.Data().Returns(togglelist);
             repo = new ToggleRepository(iData);
         }
@@ -40,20 +38,46 @@ namespace Toggler.Tests
         [Test]
         public void FeatureIsEnabledWorks_basic()
         {
-            var result = "first".FeatureIsEnabled(repository:repo);
+            var result = "first".FeatureIsEnabled(repository: repo);
             Assert.IsTrue(result);
         }
         [Test]
         public void FeatureIsEnabledWorks_WhenToggleIsNotFound()
         {
-            var result = "adfafds".FeatureIsEnabled(repository:repo);
+            var result = "adfafds".FeatureIsEnabled(repository: repo);
             Assert.IsTrue(result);
         }
 
         [Test]
-        public void FeatureIsEnabledWorks_WhenOutsideDate()
+        public void FeatureIsEnabledReturnsFalse_WhenOutsideDate()
         {
-            var result = "adfafds".FeatureIsEnabled(repository:repo);
+            var result = "DateExpired".FeatureIsEnabled(repository: repo);
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void FeatureIsEnabledWorksWhenNoEndDate()
+        {
+            var result = "NoEndDate".FeatureIsEnabled(repository: repo);
+            Assert.IsTrue(result);
+        }
+        [Test]
+        public void FeatureIsEnabledWorksWhenNoStartdDate()
+        {
+            var result = "NoStartDate".FeatureIsEnabled(repository: repo);
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void FeatureIsFalseWhenEndExpiredAndNoStartDate()
+        {
+            var result = "NoStartDateEndExpired".FeatureIsEnabled(repository: repo);
+            Assert.IsFalse(result);
+        }
+        [Test]
+        public void FeatureIsEnabledNoStartDateAndPriorToEndDate()
+        {
+            var result = "NoStartDateEndNotExpired".FeatureIsEnabled(repository: repo);
             Assert.IsTrue(result);
         }
     }

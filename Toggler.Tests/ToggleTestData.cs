@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Toggler.Tests
 {
@@ -36,11 +34,30 @@ namespace Toggler.Tests
              },
             new Toggle()
             {
-                Name = "third",
+                Name = "DateExpired",
                 IsEnabled = true,
-                StartTime = new DateTime(2016,11,19),
-                EndTime = new DateTime(2016,11,19)
-            } };
+                StartTime = new DateTime(2016,11,18,0,0,0),
+                EndTime = new DateTime(2016,11,19,23,59,0,0)
+            },    new Toggle()
+            {
+                Name = "NoEndDate",
+                IsEnabled = true,
+                StartTime = new DateTime(2016,11,18,0,0,0)
+               
+            }
+            ,    new Toggle()
+            {
+                Name = "NoStartDateEndExpired",
+                IsEnabled = true,
+                EndTime = new DateTime(2016,11,18,0,0,0)
+               
+            }
+            , new Toggle() {
+                Name = "NoStartDateEndNotExpired",
+                IsEnabled = true,
+                EndTime = DateTime.Now.AddMinutes(2)
+               
+            }, };
             return t;
         }
     }
