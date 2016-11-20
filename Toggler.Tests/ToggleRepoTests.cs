@@ -33,14 +33,27 @@ namespace Toggler.Tests
         public void GetTogglesReturnsToggles()
         {
             var setup = repo.GetToggles();
-            Assert.AreEqual(3,setup.Count());
+            Assert.IsTrue(setup.Count() > 1);
 
         }
 
         [Test]
-        public void FeatureIsEnabledWorks()
+        public void FeatureIsEnabledWorks_basic()
         {
-            var result = "First".FeatureIsEnabled(repository:repo);
+            var result = "first".FeatureIsEnabled(repository:repo);
+            Assert.IsTrue(result);
+        }
+        [Test]
+        public void FeatureIsEnabledWorks_WhenToggleIsNotFound()
+        {
+            var result = "adfafds".FeatureIsEnabled(repository:repo);
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void FeatureIsEnabledWorks_WhenOutsideDate()
+        {
+            var result = "adfafds".FeatureIsEnabled(repository:repo);
             Assert.IsTrue(result);
         }
     }

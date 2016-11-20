@@ -8,18 +8,23 @@ namespace Toggler.Tests
 {
     internal class ToggleTestData
     {
-        //    <Start>11/19/2016 8:15:01 PM</Start>
-        //<End>11/19/2016 8:17:01 PM</End>
-
-        public List<Toggle> TestData()
+      public List<Toggle> TestData()
         {
             var t = new List<Toggle>()
             { new Toggle()
                 {
                 Name = "first",
                 IsEnabled = true,
-                StartTime = new DateTime(2016,11,19),
-                EndTime = new DateTime(2016,11,19)    ,
+                StartTime = DateTime.Now,
+                EndTime = DateTime.Now.AddMinutes(1) 
+                
+                },
+                new Toggle()
+                {
+                Name = "firstDependsOnSecond",
+                IsEnabled = true,
+                StartTime = DateTime.Now,
+                EndTime = DateTime.Now.AddMinutes(1)    ,
                 DependsOn = "second"
                 },
              new Toggle()

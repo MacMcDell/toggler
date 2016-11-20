@@ -51,6 +51,9 @@ namespace Toggler
             {
                 
                 var toggle = repo.GetToggle(input);
+                if(toggle == null)
+                return true; 
+
                 stat = toggle != null && toggle.IsEnabled;
                 if (stat)
                 {
@@ -64,6 +67,7 @@ namespace Toggler
                     if (toggle.EndTime.HasValue && toggle.StartTime.HasValue)
                         stat = now > toggle.StartTime.Value && now < toggle.EndTime.Value;
 
+                    return stat; 
                 }
             }
             return stat; 
