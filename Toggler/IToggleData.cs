@@ -6,5 +6,6 @@ namespace Toggler
     public interface IToggleData
     {
         IEnumerable<Toggle> Data();
+        bool Save(Toggle toggle); 
     }
 }

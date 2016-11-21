@@ -93,5 +93,16 @@ namespace Toggler.Tests
             var result = "SecondDependsOnThird".FeatureIsEnabled(repository: repo);
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void SetData()
+        {
+            var t = new Toggle()
+            {
+                Name = "inserttest",
+                IsEnabled = true
+            };
+            repo.SetToggle(t);
+        }
     }
 }

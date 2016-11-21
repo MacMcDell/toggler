@@ -5,18 +5,23 @@ using System.Xml;
 
 namespace Toggler
 {
-  internal  class ToggleData : IToggleData
+  internal  class XmlToggleData : IToggleData
     {
        
       
         public IEnumerable<Toggle> Data()
         {
-            return XmlToggleData();
+            return DataSource();
 
            
         }
 
-        private IEnumerable<Toggle> XmlToggleData()
+        public bool Save(Toggle toggle)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<Toggle> DataSource()
         {
             Init();
             var path = AppDomain.CurrentDomain.BaseDirectory + "toggler.xml";

@@ -15,7 +15,7 @@ namespace Toggler
 
         public ToggleRepository()
         {
-            ToggleData = new ToggleData();
+            ToggleData = new XmlToggleData();
             data = ToggleData.Data();
         }
 
@@ -39,9 +39,10 @@ namespace Toggler
                 : data.FirstOrDefault(x => x.Name == name && x.Environment == environment);
         }
 
-        public Toggle SetToggle(Toggle toggle)
+        public bool SetToggle(Toggle toggle)
         {
-            throw new System.NotImplementedException();
+          return  ToggleData.Save(toggle);
+            
         }
 
         public void DeleteToggle(Toggle toggle)
