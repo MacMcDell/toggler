@@ -80,5 +80,18 @@ namespace Toggler.Tests
             var result = "NoStartDateEndNotExpired".FeatureIsEnabled(repository: repo);
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public void FeatureIsFalseDueToDependancy()
+        {
+            var result = "firstDependsOnSecond".FeatureIsEnabled(repository: repo);
+            Assert.IsFalse(result);
+        }
+        [Test]
+        public void FeatureIsFalseCascadingDependancy()
+        {
+            var result = "SecondDependsOnThird".FeatureIsEnabled(repository: repo);
+            Assert.IsFalse(result);
+        }
     }
 }

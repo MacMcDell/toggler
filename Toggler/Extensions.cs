@@ -37,7 +37,7 @@ namespace Toggler
 
         /// <summary>
         /// Checks against the string to determine if toggle exists and is currently active.
-        /// if no toggle is found return is true
+        /// if no toggle is found return is true  "in case you don't wanna clean up after yourself" 
         /// </summary>
         /// <param name="input">The name of the toggle to look for</param>
         /// <returns></returns>
@@ -52,9 +52,17 @@ namespace Toggler
                 
                 var toggle = repo.GetToggle(input);
                 if(toggle == null)
-                return true; 
+                return true;
 
-                stat = toggle != null && toggle.IsEnabled;
+                if (!string.IsNullOrEmpty(toggle.DependsOn))
+                {
+                    stat = toggle.DependsOn.FeatureIsEnabled(environment, repo);
+                    if (!stat)
+                        return false;
+                }
+
+
+                stat = toggle.IsEnabled;
                 if (stat)
                 {
                     var now = DateTime.Now;
@@ -74,5 +82,6 @@ namespace Toggler
 
 
         }
+      
     }
 }
