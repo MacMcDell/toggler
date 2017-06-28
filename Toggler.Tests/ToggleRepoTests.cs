@@ -25,6 +25,7 @@ namespace Toggler.Tests
 
 
         [Test]
+        [Category("integration")]
         public void GetTogglesReturnsToggles()
         {
             var setup = repo.GetToggles();
