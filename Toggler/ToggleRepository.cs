@@ -41,8 +41,8 @@ namespace Toggler
 
         public bool SetToggle(Toggle toggle)
         {
-          return  ToggleData.Save(toggle);
-            
+            ToggleData.Save(toggle);
+            return false;
         }
 
         public void DeleteToggle(Toggle toggle)

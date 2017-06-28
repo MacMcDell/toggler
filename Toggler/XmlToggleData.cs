@@ -18,14 +18,34 @@ namespace Toggler
 
         public bool Save(Toggle toggle)
         {
-            throw new NotImplementedException();
+            var path = AppDomain.CurrentDomain.BaseDirectory + "toggler.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(path);
+            //  XmlNode node = document.DocumentElement.
+            //create node and add value
+            XmlNode node = doc.CreateNode(XmlNodeType.Element, "Toggle", null);
+
+
+            XmlNode nodeName = doc.CreateElement("Name");
+            nodeName.InnerText = toggle.Name;
+
+            XmlNode nodeEnabled = doc.CreateElement("IsEnabled");
+            nodeEnabled.InnerText = toggle.IsEnabled.ToString();
+
+            node.AppendChild(nodeName);
+            node.AppendChild(nodeEnabled);
+            doc.DocumentElement.AppendChild(node);
+            
+            doc.Save(path);
+            return true; 
+
         }
 
         private IEnumerable<Toggle> DataSource()
         {
             Init();
-            var path = AppDomain.CurrentDomain.BaseDirectory + "toggler.xml";
-            using (var reader = new StreamReader(path))
+            var doc = AppDomain.CurrentDomain.BaseDirectory + "toggler.xml";
+            using (var reader = new StreamReader(doc))
             {
                 return reader.ReadToEnd().ToToggle();
             }

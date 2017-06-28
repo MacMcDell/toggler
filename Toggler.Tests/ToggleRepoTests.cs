@@ -97,6 +97,7 @@ namespace Toggler.Tests
         [Test]
         public void SetData()
         {
+            var repo = new ToggleRepository();
             var t = new Toggle()
             {
                 Name = "inserttest",
