@@ -8,4 +8,8 @@ before_build:
 - cmd: nuget restore
 build:
   project: Toggler.Tests/Toggler.Tests.csproj
-  verbosity: normal
+  verbosity: minimal
+test:
+  categories:
+    except:
+    - integration
