@@ -1,14 +1,14 @@
 version: 1.0.{build}
 branches:
   only:
-  - other
+  - master
 skip_tags: true
 configuration: Release
 before_build:
 - cmd: nuget restore
 build:
   project: Toggler.Tests/Toggler.Tests.csproj
-  verbosity: minimal
+  verbosity: normal
 test:
   categories:
     except:
