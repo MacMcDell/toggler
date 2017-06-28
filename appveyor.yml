@@ -1,7 +1,7 @@
 version: 1.0.{build}
 branches:
   only:
-  - master
+  - other
 skip_tags: true
 configuration: Release
 before_build:
