@@ -11,5 +11,5 @@ build:
   verbosity: normal
 test:
   categories:
-    except:
+    only:
     - integration
